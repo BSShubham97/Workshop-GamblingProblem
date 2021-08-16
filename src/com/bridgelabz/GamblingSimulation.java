@@ -8,6 +8,8 @@ public class GamblingSimulation {
     public static final float STAKE_VALUE = 0.5f;
     public int winningAmount, losingAmount, stake;
     public int totalStake = 0;
+    public int lostBet = 0;
+    public int wonBet = 0;
 
     /**
      * @UC-2 :Win or Lose
@@ -34,9 +36,12 @@ public class GamblingSimulation {
             winOrLoss();
             if (stake == losingAmount) {
                 stop = false;
+                lostBet++;
+
             }
             if (stake == winningAmount) {
                 stop = false;
+                wonBet++;
             }
         }
         return stake;
@@ -55,11 +60,23 @@ public class GamblingSimulation {
         return totalStake;
     }
 
+    /**
+     * @UC-5 give total times won or lost
+     */
+    public void giveWonOrLostTimes() {
+        System.out.println("_____________________________________________________________");
+        System.out.println("Total times won: " + wonBet);
+        System.out.println("Total times lost: " + lostBet);
+
+
+    }
+
 
     public static void main(String[] args) {
         GamblingSimulation gamblerSimulation = new GamblingSimulation();
         System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
-
+        System.out.println("-------------------------------------------------------------");
         System.out.println("Total winnings till date: " + gamblerSimulation.giveTotal());
+        gamblerSimulation.giveWonOrLostTimes();
     }
 }
