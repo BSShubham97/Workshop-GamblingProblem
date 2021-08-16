@@ -1,6 +1,7 @@
 package com.bridgelabz;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class GamblingSimulation {
     public static final int STAKE = 100;
@@ -72,29 +73,54 @@ public class GamblingSimulation {
         System.out.println("Total times lost: " + lostBet);
     }
 
-        /**
-         * @UC-6 Lucky and Unlucky day
-         */
-        public void luckyUnlucky() {
-            int i;
-            for (i = 1; i <= 20; i++) {
-                System.out.println("Day " + i + " result: " + resignStake());
-                if (stake == 50)
-                    unluckyDay = i;
-                else if (stake == 150)
-                    luckyDay = i;
-            }
-            System.out.println("Unlucky Day was : " + unluckyDay+" DAY");
-            System.out.println("Lucky Day was  : " + luckyDay+" DAY");
+    /**
+     * @UC-6 Lucky and Unlucky day
+     */
+    public void luckyUnlucky() {
+        int i;
+        for (i = 1; i <= 20; i++) {
+            resignStake();
+            if (stake == 50)
+                unluckyDay = i;
+            else if (stake == 150)
+                luckyDay = i;
+        }
+        System.out.println("Unlucky Day was : " + unluckyDay + " DAY");
+        System.out.println("Lucky Day was  : " + luckyDay + " DAY");
+    }
+
+    public static void main(String[] args) {
+        GamblingSimulation gamblerSimulation = new GamblingSimulation();
+        GamblingSimulation gamblerSimulation2 = new GamblingSimulation();
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("Total winnings till date: " + gamblerSimulation.giveTotal());
+        gamblerSimulation.giveWonOrLostTimes();
+        System.out.println("-------------------------------------------------------------");
+        gamblerSimulation.luckyUnlucky();
+
+        System.out.println("----------------------------------------------------------");
+        System.out.println("ENTER 1. CONTINUE / 2.EXIT");
+        int option = sc.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
+                    System.out.println("-------------------------------------------------------------");
+                    System.out.println("Total winnings till date: " + gamblerSimulation2.giveTotal());
+                    gamblerSimulation2.giveWonOrLostTimes();
+                    System.out.println("-------------------------------------------------------------");
+                    gamblerSimulation2.luckyUnlucky();
+                    break;
+
+                case 2:
+                    System.out.println("PROGRAM EXITED");
+                     break;
+
+
         }
 
-        public static void main (String[]args){
-            GamblingSimulation gamblerSimulation = new GamblingSimulation();
-            System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
-//            System.out.println("-------------------------------------------------------------");
-//            System.out.println("Total winnings till date: " + gamblerSimulation.giveTotal());
-//            gamblerSimulation.giveWonOrLostTimes();
-           System.out.println("-------------------------------------------------------------");
-            gamblerSimulation.luckyUnlucky();
-        }
     }
+}
