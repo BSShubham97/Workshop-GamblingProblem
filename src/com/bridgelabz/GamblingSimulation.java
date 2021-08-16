@@ -10,6 +10,8 @@ public class GamblingSimulation {
     public int totalStake = 0;
     public int lostBet = 0;
     public int wonBet = 0;
+    int unluckyDay;
+    int luckyDay;
 
     /**
      * @UC-2 :Win or Lose
@@ -53,9 +55,10 @@ public class GamblingSimulation {
     public int giveTotal() {
         int i;
         for (i = 1; i <= 20; i++) {
-            System.out.println("Day " + i + "result: " + resignStake());
+            System.out.println("Day " + i + " result: " + resignStake());
             totalStake = totalStake + stake;
             System.out.println("Total stake on day " + i + " is " + totalStake);
+
         }
         return totalStake;
     }
@@ -67,16 +70,31 @@ public class GamblingSimulation {
         System.out.println("_____________________________________________________________");
         System.out.println("Total times won: " + wonBet);
         System.out.println("Total times lost: " + lostBet);
-
-
     }
 
+        /**
+         * @UC-6 Lucky and Unlucky day
+         */
+        public void luckyUnlucky() {
+            int i;
+            for (i = 1; i <= 20; i++) {
+                System.out.println("Day " + i + " result: " + resignStake());
+                if (stake == 50)
+                    unluckyDay = i;
+                else if (stake == 150)
+                    luckyDay = i;
+            }
+            System.out.println("Unlucky Day was : " + unluckyDay+" DAY");
+            System.out.println("Lucky Day was  : " + luckyDay+" DAY");
+        }
 
-    public static void main(String[] args) {
-        GamblingSimulation gamblerSimulation = new GamblingSimulation();
-        System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Total winnings till date: " + gamblerSimulation.giveTotal());
-        gamblerSimulation.giveWonOrLostTimes();
+        public static void main (String[]args){
+            GamblingSimulation gamblerSimulation = new GamblingSimulation();
+            System.out.println("WELCOME TO GAMBLING SIMULATION PROGRAM");
+//            System.out.println("-------------------------------------------------------------");
+//            System.out.println("Total winnings till date: " + gamblerSimulation.giveTotal());
+//            gamblerSimulation.giveWonOrLostTimes();
+           System.out.println("-------------------------------------------------------------");
+            gamblerSimulation.luckyUnlucky();
+        }
     }
-}
